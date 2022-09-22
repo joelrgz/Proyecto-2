@@ -39,9 +39,53 @@ function leer(){
             <td>${nombre}</td>
             <td>${correo}</td>
             <td>${numero}</td>
+            <td><button onclick="eliminar()" class="btn btn-danger">Eliminar</button></td>
+            <td><button onclick="editar('${any}')" class="btn btn-success">Editar</button></td>
       </tr>`
 
     }
 }
+
+function editar(any){
+    let infor = JSON.parse(localStorage.getItem("infor"));
+    for (let i=0; i<infor.length; i++){
+        if(infor[i].any === any){
+            document.getElementById("body").innerHTML =
+            `<div class="row">
+            <div class="column-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Editar datos<h2>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" 
+                                id="newNombre" 
+                                class="form-control" 
+                                placeholder="${infor[i].nombre}">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" 
+                                id="newCorreo" 
+                                class="form-control" 
+                                placeholder="${infor[i].correo}"></input>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" 
+                                id="newNumero" 
+                                class="form-control" 
+                                placeholder="${infor[i].numero}">
+                            </div>
+                            <button class="btn btn-success" onclick="editar('${i}')">Editar</button>
+                            <button class="btn btn-primary">Eliminar</button>
+                        </form>
+                    </div>
+                </div>`
+        }
+    }
+    
+}
+
 
 leer();
